@@ -1,11 +1,14 @@
 package com.ll;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 class App {
     void run() {
         System.out.println("== 명언 앱 ==");
         int lastQuotationId = 0;
+        List<Quotation> quotations = new ArrayList<>();
         while (true) {
             System.out.print("명령) ");
             Scanner scanner = new Scanner(System.in);
@@ -24,7 +27,15 @@ class App {
 
                 int id = lastQuotationId;
                 Quotation quotation = new Quotation(id, content,author);
+                quotations.add(quotation);
                 System.out.println(lastQuotationId+"번 명언이 등록되었습니다.");
+            }
+            else if (cmd.equals("목록")){
+                System.out.println("번호 / 작가 / 명언");
+                for(int i=0;i<quotations.size();i++){
+                    Quotation quotation = quotations.get(i);
+                    System.out.println(quotation.id +"/"+ quotation.author+"/"+quotation.content);
+                }
             }
         }
     }
