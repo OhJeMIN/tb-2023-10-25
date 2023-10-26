@@ -60,7 +60,15 @@ class App {
     }
 
     void actionRemove(String cmd){
-        int id = Integer.parseInt(cmd.split("=")[1]);
-        System.out.println(id+"번 명언을 삭제합니다.");
+        String[] arr = cmd.split("\\?",2);
+
+        String[] order = arr[1].split("&");
+        for(String param : order){
+            String paramName = param.split("=")[0];
+            String paramValue = param.split("=")[1];
+            if(paramName.equals("id")){
+                System.out.println(paramName+"번 명언을 삭제합니다.");
+            }
+        }
     }
 }
