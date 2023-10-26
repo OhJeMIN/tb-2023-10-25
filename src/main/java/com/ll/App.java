@@ -28,6 +28,8 @@ class App {
                 actionWirte();
             } else if (cmd.equals("목록")) {
                 actionList();
+            } else if (cmd.startsWith("삭제")) {
+                actionRemove(cmd);
             }
         }
     }
@@ -55,5 +57,10 @@ class App {
             Quotation quotation = quotations.get(i);
             System.out.println(quotation.id + "/" + quotation.author + "/" + quotation.content);
         }
+    }
+
+    void actionRemove(String cmd){
+        int id = Integer.parseInt(cmd.split("=")[1]);
+        System.out.println(id+"번 명언을 삭제합니다.");
     }
 }
