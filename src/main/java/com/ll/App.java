@@ -22,6 +22,11 @@ class App {
             System.out.print("명령) ");
 
             String cmd = scanner.nextLine();
+
+            Rq rq = new Rq(cmd);
+            System.out.println(rq.getAction());
+            System.out.println(rq.getParamAsInt("id",0));
+
             if (cmd.equals("종료")) {
                 break;
             } else if (cmd.equals("등록")) {
