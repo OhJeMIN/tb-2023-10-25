@@ -32,7 +32,7 @@ class App {
             }
             else if (cmd.equals("목록")){
                 System.out.println("번호 / 작가 / 명언");
-                for(int i=0;i<quotations.size();i++){
+                for(int i=quotations.size()-1;i>=0;i--){
                     Quotation quotation = quotations.get(i);
                     System.out.println(quotation.id +"/"+ quotation.author+"/"+quotation.content);
                 }
