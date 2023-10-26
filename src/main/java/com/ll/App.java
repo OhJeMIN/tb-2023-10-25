@@ -13,8 +13,13 @@ class App {
                 break;
             }
             else if (cmd.equals("등록")) {
-                System.out.println("명언 : ");
-                System.out.println("작가 : ");
+                System.out.print("명언 : ");
+                String content = scanner.nextLine();
+
+                System.out.print("작가 : ");
+                String author = scanner.nextLine();
+
+                System.out.println("1번 명언이 등록되었습니다.");
             }
         }
     }
