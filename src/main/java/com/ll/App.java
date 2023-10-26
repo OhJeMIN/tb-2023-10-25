@@ -15,12 +15,15 @@ class App {
             }
             else if (cmd.equals("등록")) {
                 lastQuotationId++;
+
                 System.out.print("명언 : ");
                 String content = scanner.nextLine();
 
                 System.out.print("작가 : ");
                 String author = scanner.nextLine();
 
+                int id = lastQuotationId;
+                Quotation quotation = new Quotation(id, content,author);
                 System.out.println(lastQuotationId+"번 명언이 등록되었습니다.");
             }
         }
