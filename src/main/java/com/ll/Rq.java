@@ -14,6 +14,10 @@ public class Rq {
         param = new HashMap<String, String>();
         String[] cmdBits = cmd.split("\\?", 2);
         action = cmdBits[0].trim();
+
+        if (cmdBits.length == 1){
+            return;
+        }
         queryString = cmdBits[1].trim();
 
         String[] queryStringBits = queryString.split("&");
