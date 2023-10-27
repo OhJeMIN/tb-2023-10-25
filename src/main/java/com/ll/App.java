@@ -24,19 +24,22 @@ class App {
             String cmd = scanner.nextLine();
 
             Rq rq = new Rq(cmd);
-            System.out.println(rq.getAction());
-            System.out.println(rq.getParamAsInt("id",0));
 
-            if (cmd.equals("종료")) {
-                break;
-            } else if (cmd.equals("등록")) {
-                actionWirte();
-            } else if (cmd.equals("목록")) {
-                actionList();
-            } else if (cmd.startsWith("삭제")) {
-                actionRemove(cmd);
-            } else if (cmd.startsWith("수정")) {
-                actionModify(cmd);
+            switch (rq.getAction()) {
+                case "종료":
+                    return;
+                case "등록":
+                    actionWirte();
+                    break;
+                case "목록":
+                    actionList();
+                    break;
+                case "삭제":
+                    actionRemove(rq);
+                    break;
+                case "수정":
+                    actionModify(rq);
+                    break;
             }
         }
     }
@@ -66,42 +69,23 @@ class App {
         }
     }
 
-    void actionRemove(String cmd){
+    void actionRemove(Rq rq) {
 
-        int id = getParamAsInt(cmd, "id", 0);
-        if(id == 0){
+        int id = rq.getParamAsInt("id", 0);
+        if (id == 0) {
             System.out.println("id를 입력해주세요");
             return; // 함수를 끝낸다.
         }
-        System.out.println(id+"번 명언을 삭제합니다.");
+        System.out.println(id + "번 명언을 삭제합니다.");
     }
 
-    void actionModify(String cmd){
+    void actionModify(Rq rq) {
 
-        int id = getParamAsInt(cmd, "id", 0);
-        if(id == 0){
+        int id = rq.getParamAsInt("id", 0);
+        if (id == 0) {
             System.out.println("id를 입력해주세요");
             return; // 함수를 끝낸다.
         }
-        System.out.println(id+"번 명언을 수정합니다.");
-    }
-
-    int getParamAsInt(String cmd, String paramName, int defaultValue){
-        String[] arr = cmd.split("\\?",2);
-
-        String[] order = arr[1].split("&");
-        for(String param : order){
-            String _paramName = param.split("=")[0];
-            String paramValue = param.split("=")[1];
-            if(_paramName.equals(paramName)){
-                try{
-                    return Integer.parseInt(paramValue);
-                }
-                catch (NumberFormatException e){
-                    return defaultValue;
-                }
-            }
-        }
-        return defaultValue;
+        System.out.println(id + "번 명언을 수정합니다.");
     }
 }
