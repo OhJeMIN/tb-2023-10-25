@@ -13,6 +13,19 @@ public class App {
         scanner = new Scanner(System.in);
         lastQuotationId = 0;
         quotations = new ArrayList<>();
+
+        initTestData();
+    }
+
+    void initTestData() {
+        for (int i = 0; i < 10; i++) {
+            lastQuotationId++;
+            int id = lastQuotationId;
+            String content = "명언 " + id;
+            String authorName = "작가 "+ id;
+            Quotation quotation = new Quotation(id, content, authorName);
+            quotations.add(quotation);
+        }
     }
 
     public void run() {
@@ -45,7 +58,6 @@ public class App {
     }
 
     private void actionWirte() {
-        lastQuotationId++;
 
         System.out.print("명언 : ");
         String content = scanner.nextLine();
@@ -53,6 +65,7 @@ public class App {
         System.out.print("작가 : ");
         String authorName = scanner.nextLine();
 
+        lastQuotationId++;
         int id = lastQuotationId;
         Quotation quotation = new Quotation(id, content, authorName);
         quotations.add(quotation);
@@ -125,6 +138,6 @@ public class App {
         quotation.setAuthorName(authorName);
         quotation.setContent(content);
 
-        System.out.println(id+"번 명언이 수정되었습니다.");
+        System.out.println(id + "번 명언이 수정되었습니다.");
     }
 }
