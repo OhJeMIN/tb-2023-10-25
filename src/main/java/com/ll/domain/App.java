@@ -65,7 +65,7 @@ public class App {
         if (quotations.isEmpty()) System.out.println("등록된 명언이 없습니다.");
         for (int i = quotations.size() - 1; i >= 0; i--) {
             Quotation quotation = quotations.get(i);
-            System.out.println(quotation.id + "/" + quotation.author + "/" + quotation.content);
+            System.out.println(quotation.getId() + " / " + quotation.getAuthorName() + " / " + quotation.getContent());
         }
     }
 
@@ -90,7 +90,7 @@ public class App {
         for (int i = 0; i < quotations.size(); i++) {
             Quotation quotation = quotations.get(i);
 
-            if (quotation.id == id) {
+            if (quotation.getId() == id) {
                 return i;
             }
         }
@@ -114,16 +114,16 @@ public class App {
         }
 
         Quotation quotation = quotations.get(index);
-        System.out.println("명언(기존) : " + quotation.content);
+        System.out.println("명언(기존) : " + quotation.getContent());
         System.out.print("명언 : ");
         String content = scanner.nextLine();
 
-        System.out.println("작가(기존) : " + quotation.content);
+        System.out.println("작가(기존) : " + quotation.getContent());
         System.out.print("작가 : ");
         String authorName = scanner.nextLine();
 
-        quotation.author = authorName;
-        quotation.content =content;
+        quotation.setAuthorName(authorName);
+        quotation.setContent(content);
 
         System.out.println(id+"번 명언이 수정되었습니다.");
     }
