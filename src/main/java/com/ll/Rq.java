@@ -1,47 +1,42 @@
 package com.ll;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Rq {
     String cmd;
     String action;
     String queryString;
+    Map<String, String> param;
 
-    List<String> paramNames;
-    List<String> paramValues;
-    Rq(String cmd){
-        this.cmd =cmd;
-        paramNames = new ArrayList<>();
-        paramValues = new ArrayList<>();
-
-        String[] cmdBits = cmd.split("\\?",2);
+    Rq(String cmd) {
+        this.cmd = cmd;
+        param = new HashMap<String, String>();
+        String[] cmdBits = cmd.split("\\?", 2);
         action = cmdBits[0].trim();
         queryString = cmdBits[1].trim();
 
         String[] queryStringBits = queryString.split("&");
 
-        for(int i=0;i< queryStringBits.length;i++){
+        for (int i = 0; i < queryStringBits.length; i++) {
             String queryParamSt = queryStringBits[i];
             String[] queryParamStrBits = queryParamSt.split("=");
-            paramNames.add(queryParamStrBits[0]);
-            paramValues.add(queryParamStrBits[1]);
+            param.put(queryParamStrBits[0], queryParamStrBits[1]);
         }
     }
 
-    String getAction(){
+    String getAction() {
         return action;
     }
 
-    public int getParamAsInt(String paramName, int defaultValue){
-        int index = paramNames.indexOf(paramName);
+    public int getParamAsInt(String paramName, int defaultValue) {
+        String paramValue = param.get(paramName);
 
-        if (index == -1) return defaultValue;
-        try{
-            return Integer.parseInt(paramValues.get(index));
+        if (paramValue != null) {
+            try {
+                return Integer.parseInt(paramValue);
+            } catch (NumberFormatException e) { }
         }
-        catch (NumberFormatException  e){
-            return defaultValue;
-        }
+        return defaultValue;
     }
 }
