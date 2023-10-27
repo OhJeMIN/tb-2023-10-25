@@ -51,10 +51,10 @@ public class App {
         String content = scanner.nextLine();
 
         System.out.print("작가 : ");
-        String author = scanner.nextLine();
+        String authorName = scanner.nextLine();
 
         int id = lastQuotationId;
-        Quotation quotation = new Quotation(id, content, author);
+        Quotation quotation = new Quotation(id, content, authorName);
         quotations.add(quotation);
         System.out.println(lastQuotationId + "번 명언이 등록되었습니다.");
     }
@@ -100,10 +100,31 @@ public class App {
     void actionModify(Rq rq) {
 
         int id = rq.getParamAsInt("id", 0);
+
         if (id == 0) {
             System.out.println("id를 입력해주세요");
             return; // 함수를 끝낸다.
         }
-        System.out.println(id + "번 명언을 수정합니다.");
+
+        int index = findQuotationIndexById(id);
+
+        if (index == -1) {
+            System.out.println(id + "번 명언은 존재하지 않습니다.");
+            return;
+        }
+
+        Quotation quotation = quotations.get(index);
+        System.out.println("명언(기존) : " + quotation.content);
+        System.out.print("명언 : ");
+        String content = scanner.nextLine();
+
+        System.out.println("작가(기존) : " + quotation.content);
+        System.out.print("작가 : ");
+        String authorName = scanner.nextLine();
+
+        quotation.author = authorName;
+        quotation.content =content;
+
+        System.out.println(id+"번 명언이 수정되었습니다.");
     }
 }
